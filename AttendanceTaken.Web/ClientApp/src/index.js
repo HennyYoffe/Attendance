@@ -1,19 +1,28 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
-import './index.css';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { render } from 'react-dom';
+import { BrowserRouter, withRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import HomePage from './HomePage';
+import AddClassmate from './addClassmate';
+import TakeAttendance from './TakeAttendance';
+import HereToday from './HereToday';
+import Done from './Done';
 
-const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
-const rootElement = document.getElementById('root');
+class App extends React.Component {
+    render() {
+        return (
+            <div >
+                <Route exact path='/' component={HomePage} />
+                <Route exact path='/addClassmate' component={AddClassmate} />
+                <Route exact path='/takeAttendance' component={TakeAttendance} />
+                <Route exact path='/hereToday' component={HereToday} />
+                <Route exact path='/done' component={Done}/>
+            </div>);
+    }
+}
 
-ReactDOM.render(
-  <BrowserRouter basename={baseUrl}>
-    <App />
-  </BrowserRouter>,
-  rootElement);
-
-registerServiceWorker();
+render(
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>,
+    document.getElementById('root'));
